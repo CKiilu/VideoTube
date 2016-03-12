@@ -31,18 +31,31 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         // If initialization succeeds
         if (!b){
+            //Start Sia - Alive
             youTubePlayer.cueVideo("t2NgsJrrAyM");
         }
     }
 
     @Override
     public void onInitializationFailure(Provider provider, YouTubeInitializationResult youTubeInitializationResult) {
-        // If initialization fails
+        // If initialization fails get error dialogs
         if(youTubeInitializationResult.isUserRecoverableError()){
             youTubeInitializationResult.getErrorDialog(this, RECOVERY_REQUEST).show();
         } else{
             String error = String.format(getString(R.string.player_error), youTubeInitializationResult.toString());
             Toast.makeText(this, error, Toast.LENGTH_LONG).show();
         }
+    }
+
+    @Override
+    protected void onActivityResult(int requestCode, int resultCode, Intent data) {
+        if(requestCode == RECOVERY_REQUEST){
+            // Retry initialization if user tries recovery
+            getYouTubePlayerProvider().initialize(Config.YOUTUBE_API_KEY, this);
+        }
+    }
+    protected Provider getYouTubePlayerProvider(){
+        // Function to return youtube player view
+        return youTubePlayerView;
     }
 }
