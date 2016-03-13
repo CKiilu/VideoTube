@@ -63,4 +63,36 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         // Function in which toast is passed into parameters
         Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
+    private final class MyPlaybackEventListener implements YouTubePlayer.PlaybackEventListener{
+        @Override
+        public void onPlaying() {
+            // Function runs on video play
+            showMessage("Playing");
+        }
+
+        @Override
+        public void onPaused() {
+            // Function runs on video pause
+            showMessage("Paused");
+        }
+
+        @Override
+        public void onStopped() {
+            // Function runs on video stop
+            showMessage("Stopped");
+        }
+
+        @Override
+        public void onBuffering(boolean b) {
+            // Function runs on video buffer start or stop
+
+        }
+
+        @Override
+        public void onSeekTo(int i) {
+            // Function runs on video change in position
+
+        }
+    }
+
 }
