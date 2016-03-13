@@ -94,5 +94,35 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
         }
     }
+    private final class MyPlayerStateChangeListener implements YouTubePlayer.PlayerStateChangeListener{
+        @Override
+        public void onLoading() {
+            // Video is loading, player can't play or pause
+        }
 
+        @Override
+        public void onLoaded(String s) {
+            // Video has loaded and can play, pause or seek position
+        }
+
+        @Override
+        public void onAdStarted() {
+            // Advertisement starts
+        }
+
+        @Override
+        public void onVideoStarted() {
+            // Video playback has began
+        }
+
+        @Override
+        public void onVideoEnded() {
+            // Video playback has stopped
+        }
+
+        @Override
+        public void onError(YouTubePlayer.ErrorReason errorReason) {
+            // Called when errors occur
+        }
+    }
 }
