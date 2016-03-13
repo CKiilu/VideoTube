@@ -17,6 +17,8 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 
     private static final int RECOVERY_REQUEST = 1;
     private YouTubePlayerView youTubePlayerView;
+    private MyPlaybackEventListener myPlaybackEventListener;
+    private MyPlayerStateChangeListener myPlayerStateChangeListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -26,11 +28,19 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
 //        Initialize player object
         youTubePlayerView = (YouTubePlayerView)findViewById(R.id.youtube_view);
         youTubePlayerView.initialize(Config.YOUTUBE_API_KEY, this);
+
+        // Initialize playbacklistener and playerstatelistener
+        myPlayerStateChangeListener = new MyPlayerStateChangeListener();
+        myPlaybackEventListener = new MyPlaybackEventListener();
+
     }
 
     @Override
     public void onInitializationSuccess(YouTubePlayer.Provider provider, YouTubePlayer youTubePlayer, boolean b) {
         // If initialization succeeds
+        // Playerstate and playback listeners
+        youTubePlayer.setPlaybackEventListener(myPlaybackEventListener);
+        youTubePlayer.setPlayerStateChangeListener(myPlayerStateChangeListener);
         if (!b){
             //Start Sia - Alive
             youTubePlayer.loadPlaylist("PLbxg9IbgCVkS9uTUQgno-twAlpqrsVpO-");
