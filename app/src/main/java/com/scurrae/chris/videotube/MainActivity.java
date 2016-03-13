@@ -12,6 +12,7 @@ import com.google.android.youtube.player.YouTubePlayer;
 import com.google.android.youtube.player.YouTubePlayer.Provider;
 import com.google.android.youtube.player.YouTubePlayerView;
 
+
 public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.OnInitializedListener {
 
     private static final int RECOVERY_REQUEST = 1;
@@ -32,7 +33,7 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
         // If initialization succeeds
         if (!b){
             //Start Sia - Alive
-            youTubePlayer.cueVideo("t2NgsJrrAyM");
+            youTubePlayer.loadPlaylist("PLbxg9IbgCVkS9uTUQgno-twAlpqrsVpO-");
         }
     }
 
@@ -57,5 +58,9 @@ public class MainActivity extends YouTubeBaseActivity implements YouTubePlayer.O
     protected Provider getYouTubePlayerProvider(){
         // Function to return youtube player view
         return youTubePlayerView;
+    }
+    private void showMessage(String message){
+        // Function in which toast is passed into parameters
+        Toast.makeText(this, message, Toast.LENGTH_LONG).show();
     }
 }
